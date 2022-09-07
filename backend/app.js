@@ -1,9 +1,9 @@
-const express = require('express');       //Coder des serveurs web en Node pur est possible, mais long et laborieux. En effet, cela exige d'analyser manuellement chaque demande entrante. L'utilisation du framework Express simplifie ces tâches, en nous permettant de déployer nos API beaucoup plus rapidement. 
-const mongoose = require('mongoose');   //MongoDB est une base de données NoSQL. Cela signifie que l'on ne peut pas utiliser SQL pour communiquer avec. Les données sont stockées comme des collections de documents individuels décrits en JSON 
-const path = require('path');
+const express = require('express');       // Coder des serveurs web en Node pur est possible, mais long et laborieux. En effet, cela exige d'analyser manuellement chaque demande entrante. L'utilisation du framework Express simplifie ces tâches, en nous permettant de déployer nos API beaucoup plus rapidement. 
+const mongoose = require('mongoose');   // MongoDB est une base de données NoSQL. Cela signifie que l'on ne peut pas utiliser SQL pour communiquer avec. Les données sont stockées comme des collections de documents individuels décrits en JSON 
+const path = require('path');   // chemin du serveur
 
-const userRoutes = require('./routes/user');
-const sauceRoutes = require('./routes/sauce');
+const userRoutes = require('./routes/user');    // enregistrement du routeur user
+const sauceRoutes = require('./routes/sauce');    // enregistrement du routeur sauce
 
 mongoose.connect('mongodb+srv://Geoffray:Ts6ubUbdXjqLv5Y@cluster0.ubw3tpe.mongodb.net/?retryWrites=true&w=majority',
   {
@@ -26,10 +26,9 @@ app.use((req, res, next) => {  //middleware général, pas de route spécifique,
 
 app.use(express.json());        //
 
-app.use('/images', express.static(path.join(__dirname, 'images')));
-
-app.use('/api/auth', userRoutes);
-app.use('/api/sauces', sauceRoutes);
+app.use('/api/auth', userRoutes);       // on l'enregistre pour toutes les demandes effectuées vers api.auth
+app.use('/api/sauces', sauceRoutes);     // on l'enregistre pour toutes les demandes effectuées vers api.sauces
+app.use('/images', express.static(path.join(__dirname, 'images')));   //on ajoute une route pour gérer les images // static permet de dire à Express qu'il faut gérer la ressource images de manière statique (un sous-répertoire de notre répertoire de base, __dirname) à chaque fois qu'elle reçoit une requête vers la route /images
 
 module.exports = app;         //on exporte l'application  afin de l'utiliser dans les autres fichiers
 

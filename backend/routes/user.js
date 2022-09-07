@@ -3,7 +3,7 @@ const router = express.Router();
 
 const userCtrl = require('../controllers/user');
 
-router.post('/signup', userCtrl.signup);
-router.post('/login', userCtrl.login);
+router.post('/signup', userCtrl.signup);  // importation du controlleur signup
+router.post('/login', userCtrl.login);      // imortation du controlleur login
 
 module.exports = router;
